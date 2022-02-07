@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { tap } from 'rxjs';
 import { Product } from 'src/app/interfaces/product';
 import { ProductService } from 'src/app/services/product.service';
+import { ShoppingCartService } from 'src/app/services/shopping-cart.service';
 
 @Component({
   selector: 'app-products',
@@ -12,7 +13,8 @@ export class ProductsComponent implements OnInit {
 
   products: Product[] = [];
 
-  constructor(private productService: ProductService) { }
+  constructor(private productService: ProductService,
+    private shoppingService: ShoppingCartService) { }
 
   ngOnInit(): void {
     this.productService.getProducts()
@@ -24,7 +26,7 @@ export class ProductsComponent implements OnInit {
   }
 
   addToCart(product: Product): void {
-    console.log(`Add to cart ${product.name}`);
+    this.shoppingService.updateCart(product);
   }
 
 }
