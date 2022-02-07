@@ -7,18 +7,19 @@ import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
 import {MatIconModule} from '@angular/material/icon';
 import { AngularMaterialModule } from 'src/app/angular-material/angular-material.module';
+import { ProductComponent } from '../product/product.component';
 
 
 @NgModule({
   declarations: [
     ProductsComponent,
-
+    ProductComponent
   ],
   imports: [
     CommonModule,
     ProductsRoutingModule,
     AngularMaterialModule,
-    
+        
   ]
 })
 export class ProductsModule { }
