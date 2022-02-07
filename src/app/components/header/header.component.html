@@ -1,8 +1,6 @@
 <p>
     <mat-toolbar>
         <span>La tienda mursiana</span>
-        {{quantity$ | async }} - quantity; 
-        {{total$ | async }} - total; 
-        {{cart$ | async | json}} - productos; 
+        <app-cart></app-cart>
     </mat-toolbar>
 </p>
