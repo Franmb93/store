@@ -7,6 +7,7 @@ const routes: Routes = [
   {path: 'estudiantes', component: EstudiantesComponent},
   {path: 'empleados', component: EmpleadosComponent},
   { path: 'products', loadChildren: () => import('./components/products/products.module').then(m => m.ProductsModule) },
+  { path: 'users', loadChildren: () => import('./components/users/users.module').then(m => m.UsersModule) },
   {path: '**', redirectTo: '', pathMatch: 'full'}
 ];
 
