@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { tap } from 'rxjs';
+import { Store } from '../interfaces/store';
+import { DataService } from '../services/data.service';
 
 @Component({
   selector: 'app-checkout',
@@ -15,10 +18,24 @@ export class CheckoutComponent implements OnInit {
     city: ''
   }
 
+  stores: Store[] = [];
   
-  constructor() { }
+  isDelivery: boolean = true;
+  
+  constructor(private service: DataService) { }
 
   ngOnInit(): void {
+    this.getStores();
+  }
+
+  onPickDelivery(value: boolean) : void{
+    this.isDelivery = value;
+  }
+
+  private getStores(): void{
+        this.service.getStores().pipe(
+      tap((stores: Store[]) => this.stores = stores)
+    ).subscribe();
   }
 
 }

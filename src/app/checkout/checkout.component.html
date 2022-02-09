@@ -1,0 +1,49 @@
+<div class="container">
+    <form action="#" class="form" #checkoutForm="ngForm">
+        <mat-form-field class="form__element" appearance="fill">
+            <mat-label>Name</mat-label>
+            <input matInput placeholder="Name" value="" required [(ngModel)]="model.name" name="name" #name="ngModel">
+            <mat-error *ngIf="!name.valid || name.pristine">
+                Nombre del producto incorrecto
+            </mat-error>
+        </mat-form-field>
+
+        <mat-radio-group class="form__element">
+            <p>Choose an option</p>
+            <mat-radio-button value="pickup" (change)="onPickDelivery(false)">
+                pickcup
+            </mat-radio-button>
+            <mat-radio-button value="delivery" (change)="onPickDelivery(true)">
+                delivery
+            </mat-radio-button>
+        </mat-radio-group>
+        <!-- Seleccionar la direccion de entrega, que soloe stará visible si se ha seleccionado entrega a domicilio (Delivery)  -->
+        <ng-container *ngIf="isDelivery; else showStores">
+            <mat-form-field class="form__element">
+                <input matInput placeholder="Shipping Address" [(ngModel)]="model.shippingAddress"
+                    name="shippingAddress" #shippingAddress>
+            </mat-form-field>
+            <mat-form-field class="form__element">
+                <input matInput placeholder="City" [(ngModel)]="model.city" name="city" #city="ngModel"
+                    [ngModelOptions]="{standalone: true}">
+            </mat-form-field>
+
+        </ng-container>
+
+        <!-- Tiendas para recoger el pedido  -->
+        <ng-template #showStores>
+            <mat-form-field class="form__element">
+                <mat-label>
+                    Seleccionar tienda
+                </mat-label>
+
+                <mat-select name="store" #store="ngModel" [(ngModel)]="model.store">
+                    <mat-option [value]="store" *ngFor="let store of stores">
+                        {{ store.name }} -- {{ store.openingHours }}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+        </ng-template>
+    </form>
+</div>
+<app-details></app-details>
